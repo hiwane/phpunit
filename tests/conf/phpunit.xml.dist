@@ -1,6 +1,6 @@
 
 <!-- phpunit.xml -->
-<phpunit bootstrap="src/autoload.php">
+<phpunit bootstrap="../../src/autoload.php">
     <testsuites>
         <testsuite name="Application Test Suite">
             <directory>tests</directory>
