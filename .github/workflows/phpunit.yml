@@ -97,5 +97,5 @@ jobs:
           #DIR="."
           #echo XDEBUG_MODE=coverage phpunit --coverage-text --configuration=./tests/phpunit.xml.dist --filter "`basename ${DIR}`" ${{ env.phpunit_option }} ${DIR}
           #phpunit --no-coverage ${{ env.phpunit_option }} ${DIR}
-          phpunit --configuration=./tests/conf/phpunit.xml.dist tests/CalculatorTest.php
+          phpunit --configuration=./tests/conf/phpunit.xml.dist tests/
 
