@@ -26,23 +26,23 @@ jobs:
       MYSQL_DATABASE: rstapi
       phpunit_option:
 
-    services:
-      mariadb:
-        image: ${{ matrix.db-version }}
-        ports:
-          - 3306:3306
-        env:
-          MYSQL_USER: ${{ env.MYSQL_USER }}
-          MYSQL_PASSWORD: ${{ env.MYSQL_PASS }}
-          MYSQL_ROOT_PASSWORD: ${{ env.MYSQL_ROOT }}
-          MYSQL_DATABASE: ${{ env.MYSQL_DATABASE }}
-        volumes:
-          - ${{ github.workspace }}:/var/boo
-        options: >-
-          --health-cmd="mysqladmin ping"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=5
+#    services:
+#      mariadb:
+#        image: ${{ matrix.db-version }}
+#        ports:
+#          - 3306:3306
+#        env:
+#          MYSQL_USER: ${{ env.MYSQL_USER }}
+#          MYSQL_PASSWORD: ${{ env.MYSQL_PASS }}
+#          MYSQL_ROOT_PASSWORD: ${{ env.MYSQL_ROOT }}
+#          MYSQL_DATABASE: ${{ env.MYSQL_DATABASE }}
+#        volumes:
+#          - ${{ github.workspace }}:/var/boo
+#        options: >-
+#          --health-cmd="mysqladmin ping"
+#          --health-interval=10s
+#          --health-timeout=5s
+#          --health-retries=5
 
     steps:
       - name: Checkout code
@@ -60,22 +60,22 @@ jobs:
           echo env=${{ github.env }}
           echo ref=${{ github.ref }}
 
-      #==================================================
-      # DB settings
-      #==================================================
-      - name: show database
-        run: |
-          ${{ env.MYSQL_CMD_ADMIN }} -e "SELECT VERSION()"
-          ${{ env.MYSQL_CMD }}       -e 'SHOW DATABASES' || exit 0
-      - name: DB grant
-        run: |
-          ${{ env.MYSQL_CMD_ADMIN }} -e "GRANT ALL ON *.* TO '${{ env.MYSQL_USER }}'@'%'"
-          ${{ env.MYSQL_CMD_ADMIN }} -e "CREATE USER 'username'@'localhost' IDENTIFIED BY 'userpass'"
-          ${{ env.MYSQL_CMD_ADMIN }} -e "GRANT ALL ON *.* TO 'username'@'localhost'"
-          ${{ env.MYSQL_CMD_ADMIN }} -e "SELECT user,host FROM mysql.user"
-      - name: DB migration
-        run: |
-          ${{ env.MYSQL_CMDT }} -e "SHOW TABLES"
+#      #==================================================
+#      # DB settings
+#      #==================================================
+#      - name: show database
+#        run: |
+#          ${{ env.MYSQL_CMD_ADMIN }} -e "SELECT VERSION()"
+#          ${{ env.MYSQL_CMD }}       -e 'SHOW DATABASES' || exit 0
+#      - name: DB grant
+#        run: |
+#          ${{ env.MYSQL_CMD_ADMIN }} -e "GRANT ALL ON *.* TO '${{ env.MYSQL_USER }}'@'%'"
+#          ${{ env.MYSQL_CMD_ADMIN }} -e "CREATE USER 'username'@'localhost' IDENTIFIED BY 'userpass'"
+#          ${{ env.MYSQL_CMD_ADMIN }} -e "GRANT ALL ON *.* TO 'username'@'localhost'"
+#          ${{ env.MYSQL_CMD_ADMIN }} -e "SELECT user,host FROM mysql.user"
+#      - name: DB migration
+#        run: |
+#          ${{ env.MYSQL_CMDT }} -e "SHOW TABLES"
 
 
       #######################################################
