@@ -13,7 +13,7 @@ jobs:
     strategy:
       matrix:
         # php-version: ['8.1', '8,2', '8.3', 'latest']
-        php-version: ['8.1']
+        php-version: ['8.3']
         # mariadb:latest でインストールエラー
         db-version: ['mariadb:10']
     env:
@@ -55,18 +55,10 @@ jobs:
         run: |
           pwd
           echo "@@ ls -l" && ls -l
-          echo "@@ ls -l v1" && ls -l v1
           echo workspace=${{ github.workspace }}
           echo repository=${{ github.repository }}
           echo env=${{ github.env }}
           echo ref=${{ github.ref }}
-
-      #==================================================
-      # init repository
-      #==================================================
-      - name: make database_conf.php
-        run: |
-          cp config/DatabaseConfig.php.sample config/DatabaseConfig.php
 
       #==================================================
       # DB settings
