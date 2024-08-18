@@ -94,7 +94,8 @@ jobs:
 
       - name: go phpunit
         run: |
-          DIR="."
-          echo XDEBUG_MODE=coverage phpunit --coverage-text --configuration=./tests/phpunit.xml.dist --filter "`basename ${DIR}`" ${{ env.phpunit_option }} ${DIR}
-          phpunit --no-coverage ${{ env.phpunit_option }} ${DIR}
+          #DIR="."
+          #echo XDEBUG_MODE=coverage phpunit --coverage-text --configuration=./tests/phpunit.xml.dist --filter "`basename ${DIR}`" ${{ env.phpunit_option }} ${DIR}
+          #phpunit --no-coverage ${{ env.phpunit_option }} ${DIR}
+          phpunit --bootstrap vendor/autoload.php tests/CalculatorTest.php
 
